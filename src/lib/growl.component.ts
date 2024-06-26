@@ -6,7 +6,8 @@ import { Map2Service } from "common";
   templateUrl: "growl.component.html"
 })
 export class GrowlComponent implements OnInit {
-  constructor(private mapService: Map2Service) {}
+
+  constructor(public mapService: Map2Service) {}
 
   ngOnInit(): void {
     this.mapService.fetchAvailableLayers().then(layers => console.log(layers));
