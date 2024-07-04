@@ -1,10 +1,5 @@
 <div>
-  <map2 [layers]="[[
-    'view_nds_districts',
-    'view_nds_municipals', 
-    ['groundwater_measurement_stations'],
-    ['water_right_usage_locations'],
-    [{layer: 'old_water_right_usage_locations', show: false}]
-  ]]"></map2>
+  <map2 [layers]="LAYERS"></map2>
   <p>lol</p>
+  <button (click)="updateIcons()">make all random</button>
 </div>
