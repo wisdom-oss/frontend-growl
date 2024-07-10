@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  OnChanges,
+  SimpleChanges,
+  Component,
+  OnInit,
+  Input,
+  ElementRef
+} from "@angular/core";
 
 @Component({
   selector: 'lib-groundwater-level-station-icon',

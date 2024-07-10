@@ -1,0 +1,28 @@
+<map2-control *ngIf="layerContent && layerInfo && data">
+  <div>
+    <p class="has-text-weight-bold is-size-4">{{layerContent.name}}</p>
+    <p class="has-text-weight-semi-bold is-size-5">{{layerInfo.name}}</p>
+    <table>
+      <tr>
+        <th class="has-text-weight-bold">Station ID:</th>
+        <td>{{data[layerContent.key].station}}</td>
+      </tr>
+      <tr>
+        <th class="has-text-weight-bold">Date:</th>
+        <td>{{data[layerContent.key].date | date:'longDate'}}</td>
+      </tr>
+      <tr *ngIf="data[layerContent.key].classification">
+        <th class="has-text-weight-bold">Classification:</th>
+        <td>{{data[layerContent.key].classification}}</td>
+      </tr>
+      <tr *ngIf="data[layerContent.key].waterLevelNHN">
+        <th class="has-text-weight-bold">Water Level NHN:</th>
+        <td>{{data[layerContent.key].waterLevelNHN}}</td>
+      </tr>
+      <tr *ngIf="data[layerContent.key].waterLevelGOK">
+        <th class="has-text-weight-bold">Water Level GOK:</th>
+        <td>{{data[layerContent.key].waterLevelGOK}}</td>
+      </tr>
+    </table>
+  </div>
+</map2-control>
