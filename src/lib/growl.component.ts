@@ -7,19 +7,24 @@ import {
   ViewContainerRef,
   ElementRef,
   AfterViewInit,
-  OnDestroy
+  OnDestroy,
+  OnChanges,
+  SimpleChanges
 } from "@angular/core";
 import { Map2Component, LayerConfig, Map2Service, LayerKey } from "common";
+import dayjs from "dayjs";
 
 import * as L from "leaflet";
 
 import {
   GroundwaterLevelStationIconComponent
 }
-  from "./groundwater-level-station-icon/groundwater-level-station-icon.component";
+  from "./map/groundwater-level-station-icon/groundwater-level-station-icon.component";
 import { GrowlService, MeasurementClassification, MeasurementRecord } from "./growl.service";
 import { Subscription } from "rxjs";
-import { StationInfoControlComponent } from "./station-info-control/station-info-control.component";
+import { StationInfoControlComponent } from "./map/station-info-control/station-info-control.component";
+import { GroundwaterInfoControlComponent } from "./map/groundwater-info-control/groundwater-info-control.component";
+import { CountyInfoControlComponent } from "./map/county-info-control/county-info-control.component";
 
 @Component({
   selector: 'lib-growl',
@@ -29,8 +34,9 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(Map2Component) map?: Map2Component;
 
-  private GROUNDWATER_BODIES = {
+  private GROUNDWATER_BODIES: LayerConfig.ExpandedDescriptor = {
     layer: "groundwater_bodies",
+    control: [GroundwaterInfoControlComponent, "bottomleft"],
     style: () => {
       return {
         color: "#0088aa",
@@ -39,10 +45,10 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private NDS_DISTRICTS = {
+  private NDS_DISTRICTS: LayerConfig.ExpandedDescriptor = {
     layer: "view_nds_districts",
     show: false,
-    showNames: true,
+    control: [CountyInfoControlComponent, "bottomleft"],
     style: () => {
       return {
         fillOpacity: 0,
@@ -84,11 +90,14 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
   measurements?: MeasurementRecord;
   private dataSubscription?: Subscription;
 
+  dateOffset = 0;
+  date = dayjs();
+
   constructor(
     private service: GrowlService,
     public mapService: Map2Service,
     private vcr: ViewContainerRef
-  ) { }
+  ) {}
 
   updateIcons(): void {
     for (let marker of Object.values(this.markers)) {
@@ -110,12 +119,18 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  onDateUpdate() {
+    this.date = dayjs().subtract(this.dateOffset, 'days');
+    this.service.fetchMeasurementClassifications(this.date.toDate());
+  }
+
   randomColor(): string {
     return "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0");
   }
 
   ngOnInit(): void {
     this.mapService.fetchAvailableLayers().then(layers => console.log(layers));
+    // TODO: floor dates to ensure correct caching behavior
     this.service.fetchMeasurementClassifications().then(res => console.log(res));
   }
 

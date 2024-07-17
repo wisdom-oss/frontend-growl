@@ -1,5 +1,20 @@
-<div>
-  <map2 #map [layers]="LAYERS"></map2>
-  <p>lol</p>
-  <button (click)="updateIcons()">make all random</button>
+<div class="card block">
+  <div class="card-content p-0 is-clipped">
+    <map2 #map [layers]="LAYERS"></map2>
+  </div>
+  <div class="card-content">
+    <div class="is-flex is-justify-content-flex-end">
+      <p>{{date.toDate() | date:'EEEE, MMMM d'}}</p>
+    </div>
+    <input
+      class="slider is-fullwidth is-primary" 
+      style="transform: rotate(180deg);"
+      step="1" 
+      min="0" 
+      max="13"
+      [(ngModel)]="dateOffset"
+      (ngModelChange)="onDateUpdate()"
+      type="range"
+    >
+  </div>
 </div>

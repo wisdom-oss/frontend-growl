@@ -6,9 +6,12 @@ import {GrowlComponent} from "./growl.component";
 import {
   GroundwaterLevelStationIconComponent
 }
-  from "./groundwater-level-station-icon/groundwater-level-station-icon.component";
-import { StationInfoControlComponent } from "./station-info-control/station-info-control.component";
+  from "./map/groundwater-level-station-icon/groundwater-level-station-icon.component";
+import { StationInfoControlComponent } from "./map/station-info-control/station-info-control.component";
 import { CommonModule } from "@angular/common";
+import { GroundwaterInfoControlComponent } from './map/groundwater-info-control/groundwater-info-control.component';
+import { FormsModule } from "@angular/forms";
+import { CountyInfoControlComponent } from './map/county-info-control/county-info-control.component';
 
 
 
@@ -16,12 +19,15 @@ import { CommonModule } from "@angular/common";
   declarations: [
     GrowlComponent,
     GroundwaterLevelStationIconComponent,
-    StationInfoControlComponent
+    StationInfoControlComponent,
+    GroundwaterInfoControlComponent,
+    CountyInfoControlComponent
   ],
   imports: [
     CommonModule,
     WisdomModule,
-    TranslateModule
+    TranslateModule,
+    FormsModule
   ],
   exports: [
     GrowlComponent

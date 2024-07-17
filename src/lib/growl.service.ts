@@ -31,13 +31,14 @@ export interface Measurement {
 }
 
 export type MeasurementRecord = Record<StationId, Measurement>;
+type CacheKey = ReturnType<Date["getTime"]>;
 
 @Injectable({
   providedIn: 'root'
 })
 export class GrowlService {
 
-  private fetchedMeasurements = new Map<Date, MeasurementRecord>();
+  private fetchedMeasurements = new Map<CacheKey, MeasurementRecord>();
   private measurementSubject = new ReplaySubject<MeasurementRecord>();
   public measurement = this.measurementSubject.asObservable();
 
@@ -46,7 +47,7 @@ export class GrowlService {
   async fetchMeasurementClassifications(
     date: Date = new Date()
   ): Promise<Record<StationId, Measurement>> {
-    let entry = this.fetchedMeasurements.get(date);
+    let entry = this.fetchedMeasurements.get(date.getTime());
     if (entry) {
       this.measurementSubject.next(entry);
       return entry;
@@ -94,7 +95,7 @@ export class GrowlService {
       } as Measurement])
     );
 
-    this.fetchedMeasurements.set(date, entry);
+    this.fetchedMeasurements.set(date.getTime(), entry);
     this.measurementSubject.next(entry);
     return entry;
   }
