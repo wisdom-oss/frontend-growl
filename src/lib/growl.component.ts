@@ -120,7 +120,12 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onDateUpdate() {
-    this.date = dayjs().subtract(this.dateOffset, 'days');
+    this.date = dayjs()
+      .hour(0)
+      .minute(0)
+      .second(0)
+      .millisecond(0)
+      .subtract(this.dateOffset, 'days');
     this.service.fetchMeasurementClassifications(this.date.toDate());
   }
 
