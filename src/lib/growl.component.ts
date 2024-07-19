@@ -11,7 +11,7 @@ import {
   OnChanges,
   SimpleChanges
 } from "@angular/core";
-import { Map2Component, LayerConfig, Map2Service, LayerKey } from "common";
+import { Map2Component, LayerConfig, Map2Service, LayerKey, LayoutService, ResizeDirective } from "common";
 import dayjs from "dayjs";
 
 import * as L from "leaflet";
@@ -21,7 +21,7 @@ import {
 }
   from "./map/groundwater-level-station-icon/groundwater-level-station-icon.component";
 import { GrowlService, MeasurementClassification, MeasurementRecord } from "./growl.service";
-import { Subscription } from "rxjs";
+import { combineLatest, Subscription } from "rxjs";
 import { StationInfoControlComponent } from "./map/station-info-control/station-info-control.component";
 import { GroundwaterInfoControlComponent } from "./map/groundwater-info-control/groundwater-info-control.component";
 import { CountyInfoControlComponent } from "./map/county-info-control/county-info-control.component";
@@ -90,17 +90,23 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
     ]
   ];
 
+  height = "300px";
+
   markers: Record<LayerKey, ComponentRef<GroundwaterLevelStationIconComponent>> = {};
   measurements?: MeasurementRecord;
-  private dataSubscription?: Subscription;
+
+  private subscriptions: Subscription[] = [];
 
   dateOffset = 0;
   date = dayjs();
 
+  @ViewChild(ResizeDirective) resizeCardNonMap?: ResizeDirective;
+
   constructor(
     private service: GrowlService,
     public mapService: Map2Service,
-    private vcr: ViewContainerRef
+    private vcr: ViewContainerRef,
+    private layoutService: LayoutService
   ) {}
 
   updateIcons(): void {
@@ -137,15 +143,29 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
     return "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0");
   }
 
+  private fitMap() {
+    this.subscriptions.push(combineLatest([
+      this.layoutService.layout, 
+      this.resizeCardNonMap!.resize
+    ]).subscribe(([{main}, cardNonMap]) => {
+      let pads = 4 * 0.75 * this.layoutService.rem;
+      let restHeight = main!.height - (cardNonMap.height + pads);
+      console.log({main, cardNonMap, pads});
+      this.height = restHeight + "px"; 
+    }));
+  }
+
   ngOnInit(): void {
     this.mapService.fetchAvailableLayers().then(layers => console.log(layers));
     this.service.fetchMeasurementClassifications().then(res => console.log(res));
+    this.subscriptions.push(this.layoutService.layout.subscribe(layout => console.log(layout)));
   }
 
   async ngAfterViewInit(): Promise<void> {
+    this.fitMap();
     let map = this.map!;
     await map.map;
-    this.dataSubscription = this.service.measurement.subscribe(
+    this.subscriptions.push(this.service.measurement.subscribe(
       data => {
         this.measurements = data;
         for (let [key, componentRef] of Object.entries(this.markers)) {
@@ -155,11 +175,11 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
           componentRef.instance.update();
         }
       }
-    );
+    ));
   }
 
   ngOnDestroy(): void {
-    this.dataSubscription?.unsubscribe();
     for (let component of Object.values(this.markers)) component.destroy();
+    for (let sub of this.subscriptions) sub.unsubscribe();
   }
 }
