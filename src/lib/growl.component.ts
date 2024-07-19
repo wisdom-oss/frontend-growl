@@ -25,6 +25,7 @@ import { Subscription } from "rxjs";
 import { StationInfoControlComponent } from "./map/station-info-control/station-info-control.component";
 import { GroundwaterInfoControlComponent } from "./map/groundwater-info-control/groundwater-info-control.component";
 import { CountyInfoControlComponent } from "./map/county-info-control/county-info-control.component";
+import { WithdrawalInfoControlComponent } from "./map/withdrawal-info-control/withdrawal-info-control.component";
 
 @Component({
   selector: 'lib-growl',
@@ -36,7 +37,10 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private GROUNDWATER_BODIES: LayerConfig.ExpandedDescriptor = {
     layer: "groundwater_bodies",
-    control: [GroundwaterInfoControlComponent, "bottomleft"],
+    control: [
+      [GroundwaterInfoControlComponent, "bottomleft"],
+      [WithdrawalInfoControlComponent, "bottomright"]
+    ],
     style: () => {
       return {
         color: "#0088aa",
@@ -135,7 +139,6 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.mapService.fetchAvailableLayers().then(layers => console.log(layers));
-    // TODO: floor dates to ensure correct caching behavior
     this.service.fetchMeasurementClassifications().then(res => console.log(res));
   }
 
