@@ -10,12 +10,12 @@
             <rect x="118.286" y="102.286" width="25.714" height="192"/>
         </g>
     </g>
-    <g id="bottom-val" transform="matrix(1,0,0,1,4.34432,13.2372)">
+    <g id="bottom-val" transform="matrix(1,0,0,1,0.356689,234.172)">
         <g transform="matrix(83.3333,0,0,83.3333,644.032,105.714)">
         </g>
         <text x="180.571px" y="105.714px" style="font-family:'ArialMT', 'Arial';font-size:83.333px;">1234567890</text>
     </g>
-    <g id="top-val" transform="matrix(1,0,0,1,0.356689,234.172)">
+    <g id="top-val" transform="matrix(1,0,0,1,4.34432,13.2372)">
         <g transform="matrix(83.3333,0,0,83.3333,644.032,105.714)">
         </g>
         <text x="180.571px" y="105.714px" style="font-family:'ArialMT', 'Arial';font-size:83.333px;">1234567890</text>

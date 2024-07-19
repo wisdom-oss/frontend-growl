@@ -46,7 +46,7 @@ export class WithdrawalInfoControlComponent implements Map2Control {
     this.fetching = false;
     this.min = data.minimalWithdrawal;
     this.max = data.maximalWithdrawal;
-  
+
     // highlight
     this.target = event.target;
     let currentStyle = (this.target!.options.style as () => L.PathOptions)();
