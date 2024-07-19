@@ -97,7 +97,7 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
     private service: GrowlService,
     public mapService: Map2Service,
     private vcr: ViewContainerRef
-  ) {}
+  ) { }
 
   updateIcons(): void {
     for (let marker of Object.values(this.markers)) {
@@ -108,13 +108,13 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
 
   classificationColor(classification: MeasurementClassification | null): string {
     switch (classification) {
-      case MeasurementClassification.MAX_EXCEEDED: return "#000080";
-      case MeasurementClassification.VERY_HIGH: return "#00008B";
-      case MeasurementClassification.HIGH: return "#0000FF";
-      case MeasurementClassification.NORMAL: return "#1E90FF";
-      case MeasurementClassification.LOW: return "#ADD8E6";
-      case MeasurementClassification.VERY_LOW: return "#FFA07A";
-      case MeasurementClassification.MIN_UNDERSHOT: return "#FF4500";
+      case MeasurementClassification.MAX_EXCEEDED: return "#00008B"; // #000080
+      case MeasurementClassification.VERY_HIGH: return "#104E8B"; // #00008B
+      case MeasurementClassification.HIGH: return "#1E90FF"; // #0000FF
+      case MeasurementClassification.NORMAL: return "#00FF00"; // #1E90FF
+      case MeasurementClassification.LOW: return "#FFFF00"; // #ADD8E6
+      case MeasurementClassification.VERY_LOW: return "#CD6839"; // #FFA07A
+      case MeasurementClassification.MIN_UNDERSHOT: return "#FF0000"; // #FF4500
       case null: return "#888888";
     }
   }
