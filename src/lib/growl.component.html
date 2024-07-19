@@ -1,8 +1,8 @@
 <div class="card block">
   <div class="card-content p-0 is-clipped">
-    <map2 #map [layers]="LAYERS"></map2>
+    <map2 #map [layers]="LAYERS" [height]="height"></map2>
   </div>
-  <div class="card-content">
+  <div class="card-content" resize #cardNonMap>
     <div class="is-flex is-justify-content-flex-end">
       <p>{{date.toDate() | date:'EEEE, MMMM d'}}</p>
     </div>

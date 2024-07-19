@@ -12,6 +12,7 @@ import { CommonModule } from "@angular/common";
 import { GroundwaterInfoControlComponent } from './map/groundwater-info-control/groundwater-info-control.component';
 import { FormsModule } from "@angular/forms";
 import { CountyInfoControlComponent } from './map/county-info-control/county-info-control.component';
+import { WithdrawalInfoControlComponent } from './map/withdrawal-info-control/withdrawal-info-control.component';
 
 
 
@@ -21,7 +22,8 @@ import { CountyInfoControlComponent } from './map/county-info-control/county-inf
     GroundwaterLevelStationIconComponent,
     StationInfoControlComponent,
     GroundwaterInfoControlComponent,
-    CountyInfoControlComponent
+    CountyInfoControlComponent,
+    WithdrawalInfoControlComponent
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { HttpClient, HttpContext } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { USE_API_URL } from "common";
 import { firstValueFrom, ReplaySubject } from "rxjs";
+import { GeoJsonObject } from 'geojson';
 
 const API_URL = "groundwater-levels";
 
@@ -98,5 +99,12 @@ export class GrowlService {
     this.fetchedMeasurements.set(date.getTime(), entry);
     this.measurementSubject.next(entry);
     return entry;
+  }
+
+  async fetchAverageWithdrawals(...geometries: GeoJsonObject[]) {
+    return await firstValueFrom(this.http.post("water-rights/average-withdrawals", geometries, {
+      context: new HttpContext().set(USE_API_URL, true),
+      responseType: "json",
+    }));
   }
 }
