@@ -90,7 +90,7 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
     ]
   ];
 
-  height = "300px";
+  height = (window.innerHeight - 300) + "px";
 
   markers: Record<LayerKey, ComponentRef<GroundwaterLevelStationIconComponent>> = {};
   measurements?: MeasurementRecord;
@@ -147,7 +147,11 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.push(combineLatest([
       this.layoutService.layout,
       this.resizeCardNonMap!.resize
-    ]).subscribe(([{ main }, cardNonMap]) => {
+
+    ]).subscribe(([{main}, cardNonMap]) => {
+      // this value is definitely not real
+      if (cardNonMap.height == 0) return;
+
       let pads = 4 * 0.75 * this.layoutService.rem;
       let restHeight = main!.height - (cardNonMap.height + pads);
       console.log({ main, cardNonMap, pads });

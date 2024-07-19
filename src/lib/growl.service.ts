@@ -1,6 +1,6 @@
 import { HttpClient, HttpContext } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { USE_API_URL } from "common";
+import { USE_API_URL, USE_ERROR_HANDLER } from "common";
 import { firstValueFrom, ReplaySubject } from "rxjs";
 import { GeoJsonObject } from 'geojson';
 
@@ -102,9 +102,14 @@ export class GrowlService {
   }
 
   async fetchAverageWithdrawals(...geometries: GeoJsonObject[]) {
-    return await firstValueFrom(this.http.post("water-rights/average-withdrawals", geometries, {
-      context: new HttpContext().set(USE_API_URL, true),
+    return await firstValueFrom(this.http.post<{
+      minimalWithdrawal: number,
+      maximalWithdrawal: number
+    }>("water-rights/average-withdrawals", geometries, {
       responseType: "json",
+      context: new HttpContext()
+        .set(USE_API_URL, true)
+        .set(USE_ERROR_HANDLER, USE_ERROR_HANDLER.handler.TOAST),
     }));
   }
 }

@@ -13,7 +13,7 @@ import { GroundwaterInfoControlComponent } from './map/groundwater-info-control/
 import { FormsModule } from "@angular/forms";
 import { CountyInfoControlComponent } from './map/county-info-control/county-info-control.component';
 import { WithdrawalInfoControlComponent } from './map/withdrawal-info-control/withdrawal-info-control.component';
-
+import { WithdrawalDisplayComponent } from "./map/withdrawal-info-control/withdrawal-display/withdrawal-display.component";
 
 
 @NgModule({
@@ -23,7 +23,8 @@ import { WithdrawalInfoControlComponent } from './map/withdrawal-info-control/wi
     StationInfoControlComponent,
     GroundwaterInfoControlComponent,
     CountyInfoControlComponent,
-    WithdrawalInfoControlComponent
+    WithdrawalInfoControlComponent,
+    WithdrawalDisplayComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,23 @@
+<svg width="100%" height="100%" viewBox="0 0 700 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,5.3259,3.97746)">
+        <g transform="matrix(1,0,0,1,-19.4286,-26.0647)">
+            <rect x="69.714" y="81.143" width="120" height="21.143"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-19.4286,234.681)">
+            <rect x="69.714" y="81.143" width="120" height="21.143"/>
+        </g>
+        <g transform="matrix(1,0,0,1.24793,-20.8572,-51.4247)">
+            <rect x="118.286" y="102.286" width="25.714" height="192"/>
+        </g>
+    </g>
+    <g id="bottom-val" transform="matrix(1,0,0,1,4.34432,13.2372)">
+        <g transform="matrix(83.3333,0,0,83.3333,644.032,105.714)">
+        </g>
+        <text x="180.571px" y="105.714px" style="font-family:'ArialMT', 'Arial';font-size:83.333px;">1234567890</text>
+    </g>
+    <g id="top-val" transform="matrix(1,0,0,1,0.356689,234.172)">
+        <g transform="matrix(83.3333,0,0,83.3333,644.032,105.714)">
+        </g>
+        <text x="180.571px" y="105.714px" style="font-family:'ArialMT', 'Arial';font-size:83.333px;">1234567890</text>
+    </g>
+</svg>
