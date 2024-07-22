@@ -26,6 +26,7 @@ import { StationInfoControlComponent } from "./map/station-info-control/station-
 import { GroundwaterInfoControlComponent } from "./map/groundwater-info-control/groundwater-info-control.component";
 import { CountyInfoControlComponent } from "./map/county-info-control/county-info-control.component";
 import { WithdrawalInfoControlComponent } from "./map/withdrawal-info-control/withdrawal-info-control.component";
+import { LegendControlComponent } from "./map/legend-control/legend-control.component";
 
 @Component({
   selector: 'lib-growl',
@@ -65,7 +66,10 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
   private GROUNDWATER_MEASUREMENT_STATIONS: LayerConfig.ExpandedDescriptor = {
     layer: "groundwater_measurement_stations",
     cluster: false,
-    control: [StationInfoControlComponent, "bottomleft"],
+    control: [
+      [StationInfoControlComponent, "bottomleft"],
+      [LegendControlComponent, "bottomleft"]
+    ],
     marker: (latlng, content) => {
       let component = this.vcr.createComponent(GroundwaterLevelStationIconComponent);
       component.instance.color = this.classificationColor(null);

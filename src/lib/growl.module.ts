@@ -14,6 +14,7 @@ import { FormsModule } from "@angular/forms";
 import { CountyInfoControlComponent } from './map/county-info-control/county-info-control.component';
 import { WithdrawalInfoControlComponent } from './map/withdrawal-info-control/withdrawal-info-control.component';
 import { WithdrawalDisplayComponent } from "./map/withdrawal-info-control/withdrawal-display/withdrawal-display.component";
+import { LegendControlComponent } from './map/legend-control/legend-control.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { WithdrawalDisplayComponent } from "./map/withdrawal-info-control/withdr
     GroundwaterInfoControlComponent,
     CountyInfoControlComponent,
     WithdrawalInfoControlComponent,
-    WithdrawalDisplayComponent
+    WithdrawalDisplayComponent,
+    LegendControlComponent
   ],
   imports: [
     CommonModule,

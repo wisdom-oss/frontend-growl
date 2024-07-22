@@ -1,0 +1,19 @@
+<map2-control>
+  <div>
+    <table>
+      <tr class="level mb-0" *ngFor="let item of legendItems">
+        <div class="level-left">
+          <td class="level-item mr-0">
+            <span class="icon">
+              <i 
+                style="height: 1rem; width: 1rem; border: black solid 2px" 
+                [style.backgroundColor]="item[1]"
+              ></i>
+            </span>
+          </td>
+          <td class="level-item">{{item[0]}}</td>
+        </div>
+      </tr>
+    </table>
+  </div>
+</map2-control>
