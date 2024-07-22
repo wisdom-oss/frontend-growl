@@ -18,6 +18,7 @@ export class WithdrawalInfoControlComponent implements Map2Control {
   fetching = false;
   min?: number;
   max?: number;
+  formatted?: string;
 
   private isVisibleSubject = new BehaviorSubject(false);
   public isVisible = this.isVisibleSubject.asObservable();
@@ -46,6 +47,11 @@ export class WithdrawalInfoControlComponent implements Map2Control {
     this.fetching = false;
     this.min = data.minimalWithdrawal;
     this.max = data.maximalWithdrawal;
+    this.formatted = ("" + Math.floor(this.min)).split("").reverse().map((v, i) => {
+      if (i == 0) return v;
+      if (i % 3 == 0) return v + ",";
+      return v;
+    }).reverse().join("");
 
     // highlight
     this.target = event.target;
