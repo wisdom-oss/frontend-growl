@@ -43,7 +43,7 @@ export class StationInfoControlComponent implements Map2Control, OnInit, OnDestr
   }
 
   ngOnInit(): void {
-    this.dataSubscription = this.service.measurement.subscribe(
+    this.dataSubscription = this.service.measurements.subscribe(
       data => this.data = data
     );
   }

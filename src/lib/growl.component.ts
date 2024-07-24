@@ -164,16 +164,16 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.mapService.fetchAvailableLayers().then(layers => console.log(layers));
-    this.service.fetchMeasurementClassifications().then(res => console.log(res));
-    this.subscriptions.push(this.layoutService.layout.subscribe(layout => console.log(layout)));
+    this.mapService.fetchAvailableLayers(); //.then(layers => console.log(layers));
+    this.service.fetchMeasurementClassifications(); //.then(res => console.log(res));
+    // this.subscriptions.push(this.layoutService.layout.subscribe(layout => console.log(layout)));
   }
 
   async ngAfterViewInit(): Promise<void> {
     this.fitMap();
     let map = this.map!;
     await map.map;
-    this.subscriptions.push(this.service.measurement.subscribe(
+    this.subscriptions.push(this.service.measurements.subscribe(
       data => {
         this.measurements = data;
         for (let [key, componentRef] of Object.entries(this.markers)) {

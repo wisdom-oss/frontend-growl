@@ -11,7 +11,10 @@
               ></i>
             </span>
           </td>
-          <td class="level-item">{{item[0]}}</td>
+          <td class="level-item" *ngIf="count | async as countNow">
+            ({{$any(countNow)["" + item[0]]}})
+            {{item[0] ?? "Keine aktuellen Daten"}}
+          </td>
         </div>
       </tr>
     </table>

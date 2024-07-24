@@ -41,7 +41,7 @@ export class GrowlService {
 
   private fetchedMeasurements = new Map<CacheKey, MeasurementRecord>();
   private measurementSubject = new ReplaySubject<MeasurementRecord>();
-  public measurement = this.measurementSubject.asObservable();
+  public measurements = this.measurementSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
