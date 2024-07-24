@@ -23,6 +23,22 @@ export enum MeasurementClassification {
   MIN_UNDERSHOT = "Niedrigstwert unterschritten"
 }
 
+export namespace MeasurementClassification {
+  export function toString(classification: MeasurementClassification | null) {
+    let prefix = "growl.groundwater-classification.";
+    switch (classification) {
+      case MeasurementClassification.MAX_EXCEEDED: return prefix + "max-exceeded";
+      case MeasurementClassification.VERY_HIGH: return prefix + "very-high";
+      case MeasurementClassification.HIGH: return prefix + "high";
+      case MeasurementClassification.NORMAL: return prefix + "normal";
+      case MeasurementClassification.LOW: return prefix + "low";
+      case MeasurementClassification.VERY_LOW: return prefix + "very-low";
+      case MeasurementClassification.MIN_UNDERSHOT: return prefix + "min-undershot";
+      case null: return prefix + "no-data";
+    }
+  }
+}
+
 export interface Measurement {
   station: StationId,
   date: Date,

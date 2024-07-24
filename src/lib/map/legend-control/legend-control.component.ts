@@ -14,14 +14,14 @@ export class LegendControlComponent implements Map2Control {
 
   isVisible = rxjs.of(true);
 
-  legendItems = [
-    ["Höchstwert überschritten", "#00008B"],
-    ["sehr hoch", "#104E8B"],
-    ["hoch", "#1E90FF"],
-    ["normal", "#00FF00"],
-    ["niedrig", "#FFFF00"],
-    ["sehr niedrig", "#CD6839"],
-    ["Niedrigstwert unterschritten", "#FF0000"],
+  legendItems: [MeasurementClassification | null, string][] = [
+    [MeasurementClassification.MAX_EXCEEDED, "#00008B"],
+    [MeasurementClassification.VERY_HIGH, "#104E8B"],
+    [MeasurementClassification.HIGH, "#1E90FF"],
+    [MeasurementClassification.NORMAL, "#00FF00"],
+    [MeasurementClassification.LOW, "#FFFF00"],
+    [MeasurementClassification.VERY_LOW, "#CD6839"],
+    [MeasurementClassification.MIN_UNDERSHOT, "#FF0000"],
     [null, "#888888"]
   ]
 
@@ -45,5 +45,9 @@ export class LegendControlComponent implements Map2Control {
       }),
       rxjs.shareReplay(1),
     );
+  }
+
+  legendItemToString(item: MeasurementClassification | null) {
+    return MeasurementClassification.toString(item);
   }
 }

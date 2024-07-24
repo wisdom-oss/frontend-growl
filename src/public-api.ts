@@ -1,6 +1,8 @@
 import {WisdomInterface} from "common";
 
 import {GrowlComponent} from "./lib/growl.component";
+import de_DE from "./i18n/de_DE";
+import en_US from "./i18n/en_US";
 
 export const wisdomInterface: WisdomInterface = {
   route: {
@@ -9,8 +11,8 @@ export const wisdomInterface: WisdomInterface = {
   },
   scopes: [],
   translations: {
-    de_DE: {},
-    en_US: {},
+    de_DE,
+    en_US,
   },
 };
 
