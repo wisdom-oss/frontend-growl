@@ -51,7 +51,7 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private NDS_DISTRICTS: LayerConfig.ExpandedDescriptor = {
-    layer: "view_nds_districts",
+    layer: "nds_municipals",
     show: false,
     control: [CountyInfoControlComponent, "bottomleft"],
     style: () => {
