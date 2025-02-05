@@ -85,23 +85,52 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   MARIUS_LAYERS: LayerConfig.Group = [
-    [{ layer: "trench_register", show: false }],
+    [{ 
+      layer: "infiltration_areas", 
+      show: false,
+      style: () => ({
+        fillColor: "url(#crosshatch)",
+        fillOpacity: 1,
+        color: "black",
+        weight: 2,
+      })
+    }],
+    [{ 
+      layer: "trench_register", 
+      show: false,
+      style: () => ({ color: "#945834" })
+    }],
     [{ 
       layer: "heavy_rain_simulation", 
-      show: true,
-      style: () => {
-        return {
-          color: "orange"
-        }
-      } 
+      show: false,
+      style: () => ({ color: "#ff691a" })
     }],
-    [{ layer: "emergency_flow_ways", show: false }],
-    [{ layer: "heavy_rain_flooded_streets", show: false }],
-    [{ layer: "infiltration_areas", show: false }],
-    [{ layer: "greenable_roofs", show: false }],
-    [{ layer: "heavy_rain_traffic_control", show: false }],
-    [{ layer: "heavy_rain_flooded_bus_stops", show: false }],
-  ]
+    [{ 
+      layer: "emergency_flow_ways", 
+      show: false,
+      style: () => ({ color: "#e1b336" })
+    }],
+    [{ 
+      layer: "heavy_rain_flooded_streets", 
+      show: false,
+      style: () => ({ color: "#222222" })
+    }],
+    [{ 
+      layer: "greenable_roofs", 
+      show: false,
+      style: () => ({ color: "green" })
+    }],
+    [{ 
+      layer: "heavy_rain_traffic_control", 
+      show: false,
+      style: () => ({ color: "#da1320" })
+    }],
+    [{ 
+      layer: "heavy_rain_flooded_bus_stops", 
+      show: false,
+      cluster: false,
+    }],
+  ];  
 
   LAYERS: LayerConfig.Input = [
     this.GROUNDWATER_BODIES,
