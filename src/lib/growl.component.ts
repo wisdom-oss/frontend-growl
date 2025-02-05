@@ -84,13 +84,33 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   };
 
+  MARIUS_LAYERS: LayerConfig.Group = [
+    [{ layer: "trench_register", show: false }],
+    [{ 
+      layer: "heavy_rain_simulation", 
+      show: true,
+      style: () => {
+        return {
+          color: "orange"
+        }
+      } 
+    }],
+    [{ layer: "emergency_flow_ways", show: false }],
+    [{ layer: "heavy_rain_flooded_streets", show: false }],
+    [{ layer: "infiltration_areas", show: false }],
+    [{ layer: "greenable_roofs", show: false }],
+    [{ layer: "heavy_rain_traffic_control", show: false }],
+    [{ layer: "heavy_rain_flooded_bus_stops", show: false }],
+  ]
+
   LAYERS: LayerConfig.Input = [
     this.GROUNDWATER_BODIES,
     [
       [this.NDS_DISTRICTS],
       [this.GROUNDWATER_MEASUREMENT_STATIONS],
       [{ layer: "water_right_usage_locations", show: false }],
-      [{ layer: 'old_water_right_usage_locations', show: false }]
+      [{ layer: 'old_water_right_usage_locations', show: false }],
+      ...this.MARIUS_LAYERS,
     ]
   ];
 
@@ -111,7 +131,9 @@ export class GrowlComponent implements OnInit, AfterViewInit, OnDestroy {
     public mapService: Map2Service,
     private vcr: ViewContainerRef,
     private layoutService: LayoutService
-  ) { }
+  ) {
+    mapService.fetchAvailableLayers().then(data => console.log(data?.map(l => l.key)));
+  }
 
   updateIcons(): void {
     for (let marker of Object.values(this.markers)) {
